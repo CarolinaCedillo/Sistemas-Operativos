@@ -97,7 +97,7 @@ struct stat st;
 fstat(fd,&st);
 int fs = st.st_size;
 
-char *map = mmap(0, fs, PROT_READ, MAP_SHARED, fd, 0);
+char *map = mmap(0, fs, PROT_READ, MAP_SHARED, fd, 0); /*PROT_WRITE*/
 if(map == MAP_FAILED){
   close(fd);
   perror("Error mapeando el archivo");
@@ -119,23 +119,23 @@ move(c,9+r);
 do{
   ch = leeChar();
   switch (ch) {
-    case 0x185841:
+    case 0x1b5b41:
     r = (r>0) ? r - 1 : 24;
       break;
-    case 0x185842:
+    case 0x1b5b42:
     r = (r<24) ? r + 1 : 0;
       break;
-    case 0x185843:
+    case 0x1b5b43:
     c = (c<31) ? c + 1 : 0;
       break;
-    case 0x185844:
+    case 0x1b5b44:
     c = (c>0) ? c - 1 : 31;
       break;
     default:      
       if (c<16){
         char n = tolower(ch);
         if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')){
-          map[r*16+c]=n;
+          //map[r*16+c]=n;
         }
       }
       else {
@@ -150,7 +150,7 @@ do{
   }
 
   y = r;
-  x = (c<16) ? c*3+9 : 41+c;
+  x = (c<16) ? c*3+9 : 40+c;
 
   move(26,5);
   printw("Estoy en %d,%d: Lei %d",r,c,ch);

@@ -79,7 +79,7 @@ struct stat st;
 fstat(fd,&st);
 int fs = st.st_size;
 
-char *map = mmap(0, fs, PROT_READ, MAP_SHARED, fd, 0); /*PROT_WRITE*/
+char *map = mmap(0, fs, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); /*PROT_WRITE*/
 if(map == MAP_FAILED){
   close(fd);
   perror("Error mapeando el archivo");

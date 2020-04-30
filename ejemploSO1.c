@@ -4,6 +4,9 @@
 #include <curses.h>
 #include <string.h>
 #include <unistd.h>
+#include "leerarchivo.h"
+
+int abrirArchivo(char parametro[]);
 
 struct s_dir{
   int tipo;
@@ -62,6 +65,7 @@ do{
          // si es archivo salte
          if (res[i].tipo == DT_REG) {
            sigue=0;
+           abrirArchivo(res[i].nombre);
          }
        } else {
          if(strcmp("..",res[i].nombre) == 0){

@@ -68,22 +68,27 @@ int main(){
   noecho(); //no mostar el caracter leido
 
 //Abrir archivo
-int fd = open(FILEPATH, O_RDONLY);
+//int fd = open(FILEPATH, O_RDONLY);
+int fd = open (FILEPATH, O_RDWR)
 if (fd == -1){
     perror("Error abriendo el arcivo");
     exit(EXIT_FAILURE);
 }
 
-//Mapea archivo
 struct stat st;
 fstat(fd,&st);
 int fs = st.st_size;
 
+//Mapeo el archivo
 char *map = mmap(0, fs, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); /*PROT_WRITE*/
 if(map == MAP_FAILED){
   close(fd);
   perror("Error mapeando el archivo");
   exit(EXIT_FAILURE);
+}
+
+if(munmap(map,fs) == -1){
+  perror("Error un-mmapping the file");
 }
 
 for(int i=0; i<25; i++){

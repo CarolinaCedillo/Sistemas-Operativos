@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
-#define FILEPATH "eje1v3.c"
+//#define FILEPATH "eje1v3.c"
 
 /*Editar*/
 int leeChar() {
@@ -62,14 +62,14 @@ char * hazLinea(char *base, int dir){
 }
 
 
-int main(){
+int abrirArchivo(char parametro[]){
   initscr();
   raw();
   noecho(); //no mostar el caracter leido
 
 //Abrir archivo
 //int fd = open(FILEPATH, O_RDONLY);
-int fd = open (FILEPATH, O_RDWR);
+int fd = open (parametro, O_RDWR);
 if (fd == -1){
     perror("Error abriendo el archivo");
     exit(EXIT_FAILURE);

@@ -4,7 +4,7 @@
 #include <curses.h>
 #include <string.h>
 #include <unistd.h>
-#include "leerarchivo.h"
+#include "eje1.h"
 
 int abrirArchivo(char parametro[]);
 

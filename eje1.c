@@ -17,15 +17,6 @@
 #define FILEPATH "eje1.c"
 
 /*Editar*/
-// int leeChar(){
-//   int chars[5];
-//   int ch, i=0;
-//   nodelay(stdscr, TRUE);
-//   while ((ch = getch()) == ERR);
-//   ungetch(ch);
-//   while ((ch = getch()) != ERR){
-//     chars[i++]=ch;
-// }
 int leeChar() {
   int chars[5];
   int ch,i=0;
@@ -43,15 +34,6 @@ int leeChar() {
   }
   return res;
 }
-//
-//   int res=0;
-//   for(int j=0; j<i;j++){
-//     res <<=8;
-//     res =chars[j];
-//   }
-//   return res;
-// }
-
 
 char * hazLinea(char *base, int dir){
     char linea[100]; //la linea es más pequeña
@@ -64,7 +46,7 @@ char * hazLinea(char *base, int dir){
       b = base[dir+4*i+1];
       c = base[dir+4*i+2];
       d = base[dir+4*i+3];
-      o += sprintf(&linea[o],"%02x %02x %02x %02x", a, b, c, d);
+      o += sprintf(&linea[o]," %02x %02x %02x %02x", a, b, c, d);
     }
     for (int i=0; i<16; i++){
       if(isprint(base[dir+i])){

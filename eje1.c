@@ -1,7 +1,7 @@
 /* eje1.c
  * Muestra archivo en hexadecimal
  * Ejecutar: gcc eje1.c -lncurses -o eje1
- * Autorees: Rosa González, Jovanny Ulloa, Carolina Cedillo
+ * Autorees: Rosa González, maxpowerUlloa, Catolina Cedillo
  */
 
 #include <stdio.h>
@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
-#define FILEPATH "eje1.c"
+#define FILEPATH "eje1v2.c"
 
 /*Editar*/
 int leeChar() {
@@ -69,9 +69,9 @@ int main(){
 
 //Abrir archivo
 //int fd = open(FILEPATH, O_RDONLY);
-int fd = open (FILEPATH, O_RDWR)
+int fd = open (FILEPATH, O_RDWR);
 if (fd == -1){
-    perror("Error abriendo el arcivo");
+    perror("Error abriendo el archivo");
     exit(EXIT_FAILURE);
 }
 
@@ -87,9 +87,10 @@ if(map == MAP_FAILED){
   exit(EXIT_FAILURE);
 }
 
-if(munmap(map,fs) == -1){
-  perror("Error un-mmapping the file");
-}
+// if(munmap(map,fs) == -1){
+//   perror("Error un-mmapping the file");
+// }
+
 
 for(int i=0; i<25; i++){
   //Haz linea, base y offset
@@ -118,7 +119,7 @@ do{
     case 0x1b5b44:
     c = (c>0) ? c - 1 : 31;
       break;
-    default:      
+    default:
       if (c<16){
         char n = tolower(ch);
         if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')){
@@ -140,7 +141,7 @@ do{
   x = (c<16) ? c*3+9 : 40+c;
 
   move(26,5);
-  printw("Estoy en %d,%d: Lei %d",r,c,ch);
+  printw("Estoy en %d,%d: Lei %0x",r,c,ch);
   move(y,x);
 
   refresh();

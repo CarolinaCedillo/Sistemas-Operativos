@@ -14,6 +14,13 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
+// limpiar pantalla en Windows o linux
+#ifdef _WIN32
+#define CLEAR "cls"
+#else 
+#define CLEAR "clear"
+#endif
+
 //#define FILEPATH "eje1v3.c"
 
 /*Editar*/
@@ -63,12 +70,14 @@ char * hazLinea(char *base, int dir){
 
 
 int abrirArchivo(char parametro[]){
+  system(CLEAR);
   initscr();
   raw();
   noecho(); //no mostar el caracter leido
-
+  
 //Abrir archivo
 //int fd = open(FILEPATH, O_RDONLY);
+printf("%s\n",parametro);
 int fd = open (parametro, O_RDWR);
 if (fd == -1){
     perror("Error abriendo el archivo");

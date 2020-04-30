@@ -14,14 +14,7 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 
-// limpiar pantalla en Windows o linux
-#ifdef _WIN32
-#define CLEAR "cls"
-#else 
-#define CLEAR "clear"
-#endif
-
-//#define FILEPATH "eje1v3.c"
+#define FILEPATH "eje1v3.c"
 
 /*Editar*/
 int leeChar() {
@@ -69,16 +62,14 @@ char * hazLinea(char *base, int dir){
 }
 
 
-int abrirArchivo(char parametro[]){
-  system(CLEAR);
+int main(){
   initscr();
   raw();
   noecho(); //no mostar el caracter leido
-  
+
 //Abrir archivo
 //int fd = open(FILEPATH, O_RDONLY);
-printf("%s\n",parametro);
-int fd = open (parametro, O_RDWR);
+int fd = open (FILEPATH, O_RDWR);
 if (fd == -1){
     perror("Error abriendo el archivo");
     exit(EXIT_FAILURE);
@@ -130,16 +121,10 @@ do{
       break;
     default:
       if (c<16){
-        char n = tolower(ch);
+        char n = tolower(ch); //hecar si es hexadecimal. Funciion string to long que regrese srt to l,
         if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')){
-          map[r*16+c]=n;
+          //map[r*16+c]=n; //linea co(n el que se modifica el archivo (escribir en el mapa de memoria lo que quiero escribir)
         }
-      }
-      if(c>16){
-        char largo = tolower(ch);
-        if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
-        strtol(largo, NULL, 16);
-        map[r*16+c]=largo;
       }
       else {
         if (isprint(ch)){
@@ -171,3 +156,61 @@ close(fd);
 return 0;
 
 }
+
+
+
+
+//   	DIR *dir=opendir(".");
+//   	 struct dirent *dp;
+//   	int i=0;
+//   	while((dp=readdir(dir)) != NULL) {
+//   		if(DT_DIR == dp->d_type) {
+//   			printf("D ");
+//   		}
+//   		else {
+//   			printf("F ");
+//   		}
+//   		printf("%s\n",dp->d_name);
+//   }
+//
+//   char *lista[] = {dp->d_name};//{};//{"Uno", "Dos", "Tres", "Cuatro" };
+//    int i=0;
+//   int c;
+//   initscr();
+//   raw();
+//   noecho(); /* No muestres el caracter leido */
+// //   cbreak();
+//   do {
+//      for (int j=0; j < 4; j++) {
+//         if (j == i) {
+//           attron(A_REVERSE);
+//         }
+//         mvprintw(5+j,5,lista[j]);
+//         attroff(A_REVERSE);
+//      }
+//      move(5+i,5);
+//      refresh();
+//      c = getch();
+//      switch(c) {
+//         case 'A':
+//            i = (i>0) ? i - 1 : 3;
+//            break;
+//         case 'B':
+//            i = (i<3) ? i + 1 : 0;
+//            break;
+//         default:
+//            // Nothing
+//            break;
+//      }
+//      move(10,5);
+//      printw("Estoy en %d: Lei %d",i,c);
+//   } while (c != 'q');
+//
+//
+//
+//
+// //
+//
+// 	closedir(dir);
+// 	return 0;
+ //}

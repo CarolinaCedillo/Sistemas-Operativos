@@ -135,6 +135,12 @@ do{
           map[r*16+c]=n;
         }
       }
+      if(c>16){
+        char largo = tolower(ch);
+        if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
+        strtol(largo, NULL, 16);
+        map[r*16+c]=largo;
+      }
       else {
         if (isprint(ch)){
           map[r*16+c-16]=ch;

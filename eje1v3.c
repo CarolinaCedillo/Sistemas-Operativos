@@ -123,7 +123,7 @@ do{
       if (c<16){
         char n = tolower(ch);
         if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')){
-          //map[r*16+c]=n;
+          map[r*16+c]=n;
         }
       }
       else {

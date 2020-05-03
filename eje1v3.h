@@ -113,7 +113,7 @@ int c=0, r=0;
 int x=0, y=0;
 move(c,9+r);
 long b;
-//char *p;
+char jovas[2];
 
 do{
   ch = leeChar();
@@ -138,7 +138,9 @@ do{
         }
       }
       if(c>16){
-        char *largo = tolower(ch);
+        jovas[0] = tolower(ch);
+        jovas[1] = '\0';
+        char largo = tolower(jovas);
         if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
         b = strtol(largo,NULL,16);
         map[r*16+c]=b;

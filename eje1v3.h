@@ -2,7 +2,7 @@
  * Muestra archivo en hexadecimal
  * Ejecutar: gcc ejemploSO1.c eje1v3.h -lncurses -o ./ejemploSO1
  * Autorees: Rasa González, Jovanny Ulloa, Carolina Cedillo
- */
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -138,9 +138,9 @@ do{
         }
       }
       if(c>16){
-        char largo = tolower(ch);
+        char *largo = tolower(ch);
         if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
-        b = strtol(largo, NULL, 16);
+        b = strtol(largo,NULL,16);
         map[r*16+c]=b;
       }
     }

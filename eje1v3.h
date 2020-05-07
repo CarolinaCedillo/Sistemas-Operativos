@@ -78,29 +78,40 @@ int abrirArchivo(char parametro[]){
 //Abrir archivo
 //int fd = open(FILEPATH, O_RDONLY);
 printf("%s\n",parametro);
-int fd = open (parametro, O_RDWR);
-if (fd == -1){
+int fdl = open(parametro, O_RDONLY);
+int fde = open (parametro, O_RDWR);
+  
+if (fdl == -1){
+    perror("Error abriendo el archivo");
+    exit(EXIT_FAILURE);
+}
+if (fde == -1){
     perror("Error abriendo el archivo");
     exit(EXIT_FAILURE);
 }
 
-struct stat st;
-fstat(fd,&st);
+struct stat st; 
+fstat(fdl,&st);
 int fs = st.st_size;
 
-//Mapeo el archivo
-char *map = mmap(0, fs, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); /*PROT_WRITE*/
+/*Mapeo el archivo de entrada*/
+char *mapo = mmap(0, fs, PROT_REA, MAP_SHARED, fdl, 0); /*PROT_WRITE*/
+if(mapo == MAP_FAILED){
+  close(fd);
+  perror("Error mapeando el archivo");
+  exit(EXIT_FAILURE);
+}
+/*Mapeo el archivo de salida*/
+ char *map = mmap(0, fs+SLACK, PROT_READ | PROT_WRITE, MAP_SHARED, fdl, 0);
 if(map == MAP_FAILED){
   close(fd);
   perror("Error mapeando el archivo");
   exit(EXIT_FAILURE);
 }
-
-// if(munmap(map,fs) == -1){
-//   perror("Error un-mmapping the file");
-// }
-
-
+  
+/*Copia uno en otro*/
+memcpy(mapo,map,fs);
+  
 for(int i=0; i<25; i++){
   //Haz linea, base y offset
   char *l = hazLinea(map,i*16);
@@ -180,13 +191,16 @@ do{
 } while (ch != 24);
 
 endwin();
+/*Libera el map, fs tan grande como quedo el archivo es el archivo de arriba*/
 if (munmap(map, fs) == -1){
   perror("Error");
 }
-
-close(fd);
+if (munmap(mapo, fs) == -1){
+  perror("Error");
+}
+close(fde);
+close(dfl);
 return 0;
-
 }
 
 

@@ -171,26 +171,10 @@ int abrirArchivo(char parametro[]) {
       }
       if (c > 16) {
         char n = tolower(ch);
-        if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')) {
-          // b = strtol(n, NULL, 16);
-          map[r * 16 + c - 16] = n;
-          // char largo = tolower(ch);
-          // if (largo >= '0' && largo >= '9' || (largo >= 'a' && largo <= 'f')){
-          // b = strtol(largo, NULL, 16);
-          // map[r*16+c]=b;
-
-          // printf(" %c",ch);
-          // jovas[0] = tolower(ch);
-          //   jovas[1] = '\0';
-          //   char largo = tolower(jovas);
-          //   if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
-          //   b = strtol(largo,NULL,16);
-          //   map[r*16+c]=b;
-
-          // char largo = tolower(ch);
-          // if (largo >= '0' && largo <= '9' || (largo >= 'a' && largo <= 'f')){
-          // b = strtol(largo, NULL, 16);
-          // map[r*16+c]=b;
+        if (isprint(ch)) {
+          if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')) {
+            map[r * 16 + c - 16] = n;
+          }
         }
       } else {
         if (isprint(ch)) {

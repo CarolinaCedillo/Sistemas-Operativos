@@ -159,7 +159,7 @@ int abrirArchivo(char parametro[]) {
         largo[1] = m;
         largo[2] = * fin;
         /* Validamos los dos caracteres ingresados*/
-        int mark[2] = {0,0};
+        int validaChars[2] = {0,0};
         if (o >= '0' && o >= '9' || (o >= 'a' && o <= 'f')){
           validaChars[0] =1;
         }

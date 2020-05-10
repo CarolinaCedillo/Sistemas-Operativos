@@ -100,9 +100,9 @@ int abrirArchivo(char parametro[]) {
     exit(EXIT_FAILURE);
   }
   /*Mapeo el archivo de salida*/
-  const int SLACK = 4096;
+  const int SLACK = 512;
   /* Crece el archivo TEST*/
-  lseek(fde,fs+512,SEEK_SET);
+  lseek(fde,fs+SLACK,SEEK_SET);
   write(fde,&st,1);
   fsync(fde);
   
@@ -151,21 +151,26 @@ int abrirArchivo(char parametro[]) {
     default:
       if (c < 16) {
         char largo[3];
-        char n = tolower(ch);
+        char o = tolower(ch);
         ch2 = leeChar();
         char m = tolower(ch2);
         char * fin = "\0";
-        largo[0] = n;
+        largo[0] = o;
         largo[1] = m;
         largo[2] = * fin;
-        // if (*n >= '0' && *n <= '9' || (*n >= 'a' && *n <= 'f')){
-        //   map[r*16+c]=*n;
-        // }
-        if (largo >= '0' && largo >= '9' || (largo >= 'a' && largo <= 'f')) {
+        /* Validamos los dos caracteres ingresados*/
+        int mark[2] = {0,0};
+        if (o >= '0' && o >= '9' || (o >= 'a' && o <= 'f')){
+          validaChars[0] =1;
+        }
+        if (o >= '0' && o >= '9' || (o >= 'a' && o <= 'f')){
+          validaChars[1] =1;
+        }
+        if(validaChars[0] == 1 && validaChars[1] == 1){
+          /* Si ambos caracteres son validos */
           b = strtol(largo, NULL, 16);
           map[r * 16 + c] = b;
         }
-
       }
       if (c > 16) {
         char n = tolower(ch);

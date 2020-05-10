@@ -101,10 +101,6 @@ int abrirArchivo(char parametro[]) {
   }
   /*Mapeo el archivo de salida*/
   const int SLACK = 512;
-  /* Crece el archivo TEST*/
-  lseek(fde,fs+SLACK,SEEK_SET);
-  write(fde,&st,1);
-  fsync(fde);
   
   char * map = mmap(0, fs + SLACK, PROT_READ | PROT_WRITE, MAP_SHARED, fde, 0);
   if (map == MAP_FAILED) {
@@ -159,7 +155,7 @@ int abrirArchivo(char parametro[]) {
         largo[1] = m;
         largo[2] = * fin;
         /* Validamos los dos caracteres ingresados*/
-        int validaChars[2] = {0,0};
+        /*int validaChars[2] = {0,0};
         if (o >= '0' && o >= '9' || (o >= 'a' && o <= 'f')){
           validaChars[0] =1;
         }
@@ -167,10 +163,11 @@ int abrirArchivo(char parametro[]) {
           validaChars[1] =1;
         }
         if(validaChars[0] == 1 && validaChars[1] == 1){
-          /* Si ambos caracteres son validos */
           b = strtol(largo, NULL, 16);
           map[r * 16 + c] = b;
-        }
+        }*/
+        b = strtol(largo, NULL, 16);
+         map[r * 16 + c] = b;
       }
       if (c > 16) {
         char n = tolower(ch);

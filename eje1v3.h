@@ -16,12 +16,11 @@
 
 // limpiar pantalla en Windows o linux
 #ifdef _WIN32
-# define CLEAR "cls"
+#define CLEAR "cls"
 #else
-# define CLEAR "clear"
+#define CLEAR "clear"
 #endif
-
-//#define FILEPATH "eje1v3.c"
+#define FILEPATH "eje1v3.c"
 
 /*Editar*/
 int leeChar() {

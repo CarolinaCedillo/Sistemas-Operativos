@@ -173,7 +173,7 @@ int abrirArchivo(char parametro[]) {
         char n = tolower(ch);
         if (isprint(ch)) {
           // if (n >= '0' && n <= '9' || (n >= 'a' && n <= 'f')) {
-          //   map[r * 16 + c - 16] = n;
+             map[r * 16 + c - 16] = n;
           // }
         }
       } else {

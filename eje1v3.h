@@ -143,6 +143,10 @@ int abrirArchivo(char parametro[]) {
     case 0x1b5b44:
       c = (c > 0) ? c - 1 : 31;
       break;
+    case 'S':
+      system(CLEAR);
+      printf("Saliendo");
+      exit(0);  
     default:
       if (c < 16) {
         char largo[3];

@@ -111,7 +111,7 @@ int abrirArchivo(char parametro[]) {
 
   /*Copia uno en otro*/
   memcpy(map, mapo, fs);
-//IPINTA todo y cuando
+  //PINTA todo y cuando
   for (int i = 0; i < 25; i++) {
     //Haz linea, base y offset
     char * l = hazLinea(map, i * 16);
@@ -126,8 +126,7 @@ int abrirArchivo(char parametro[]) {
   int x = 0, y = 0;
   move(c, 9 + r);
   long b;
-  //char *p;
-  // char *jovas[2];
+  int repintar = 0;
 
   do {
     ch = leeChar();
@@ -167,7 +166,6 @@ int abrirArchivo(char parametro[]) {
           b = strtol(largo, NULL, 16);
           map[r * 16 + c] = b;
         }
-
       }
       else {
         char n = tolower(ch);
@@ -177,20 +175,26 @@ int abrirArchivo(char parametro[]) {
           // }
         }
       }
-      // else {
-      //   if (isprint(ch)) {
-      //     map[r * 16 + c - 16] = ch;
-      //
-           char * l = hazLinea(map, r * 16);
-           mvprintw(r, 0, l);
-      //   }
-         break;
-      // }
+     char * l = hazLinea(map, r * 16);
+     //mvprintw(r, 0, l);
+     repintar = 1;
+     break;
     }
 
+   if(repintar == 1){
+    //REPINTA todo
+    for (int i = 0; i < 25; i++) {
+      //Haz linea, base y offset
+      char * l = hazLinea(map, i * 16);
+      //mvprintw(i,0,l);
+      move(i, 0);
+      addstr(l);
+    }
+    refresh();
+   }
     y = r;
     x = (c < 16) ? c * 3 + 9 : 40 + c;
-
+    
     move(26, 5);
     printw("Estoy en %d,%d: Lei %0x    ", r, c, ch);
     move(y, x);

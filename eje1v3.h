@@ -147,6 +147,7 @@ int abrirArchivo(char parametro[]) {
       system(CLEAR);
       printf("Saliendo");
       exit(0);  
+      break;
     default:
       if (c < 16) {
         char largo[3];

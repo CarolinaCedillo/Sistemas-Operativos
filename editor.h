@@ -150,8 +150,17 @@ int abrirArchivo(char parametro[]) {
 
     case 0x1B:
       system(CLEAR);
-      printf("Saliendo ");
-      return 0;
+      printf("Saliendo... ");
+      /*Libera el map, fs tan grande como quedo el archivo es el archivo de arriba*/
+      if (munmap(map, fs) == -1) {
+        perror("Error");
+      }
+      if (munmap(mapo, fs) == -1) {
+        perror("Error");
+      }
+      close(fde);
+      close(fdl);
+      preparaDir();
       // exit (0);
       break;
     default:

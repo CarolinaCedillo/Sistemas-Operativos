@@ -1,7 +1,9 @@
 /* dir.c
- * Muestra archivo en hexadecimal
- * Ejecutar: gcc ejemploSO1.c eje1v3.h -lncurses -o ./ejemploSO1
- * Autorees: Rasa González, Jovanny Ulloa, Carolina Cedillo
+ * Muestra el directorio
+ * Ejecutar: gcc dir.c editor.h -lncurses -o ./editor
+ * Autores: Rosa González, Jovanny Ulloa, Carolina Cedillo
+ * Profesor: René Mac Kinney Romero 
+ * Materia: Sistemas Operativos
  */
 
 #include <stdio.h>

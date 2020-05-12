@@ -33,10 +33,9 @@ int leeDir(char *direc){
   return i;//-1;
 }
 
-void preparaDir(){
-
+int main(){
+  
   char cwd[256];
-
   getcwd(cwd,256);
   int max = leeDir(cwd);
   int i=0;
@@ -101,11 +100,5 @@ do{
       refresh();
  } while (c != 24);
  endwin();
-}
-
-int main(){
-  
- preparaDir();
  return 0;
-  
 }

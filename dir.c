@@ -33,7 +33,8 @@ int leeDir(char *direc){
   return i;//-1;
 }
 
-int main() {
+void preparaDir(){
+
   char cwd[256];
 
   getcwd(cwd,256);
@@ -99,9 +100,12 @@ do{
       //move(y,x);
       refresh();
  } while (c != 24);
-
  endwin();
+}
 
+int main(){
+  
+ preparaDir();
  return 0;
-
- }
+  
+}

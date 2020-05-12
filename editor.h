@@ -160,7 +160,7 @@ int abrirArchivo(char parametro[]) {
       }
       close(fde);
       close(fdl);
-      preparaDir();
+      return 0;
       // exit (0);
       break;
     default:
